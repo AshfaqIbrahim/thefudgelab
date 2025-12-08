@@ -32,7 +32,7 @@ const ProductHero = () => {
         {/* Right Image */}
         <div className="relative flex justify-center">
           <img
-            src="/src/assets/home-cover1.jpg"
+            src="images/home-cover1.jpg"
             alt="Brownie"
             className="w-full max-w-lg drop-shadow-2xl rounded-lg"
           />
