@@ -32,7 +32,7 @@ const Register = () => {
         {/* Image Section - Left Side */}
         <div className="flex-1 rounded-3xl overflow-hidden">
           <img
-            src="\src\assets\cover.jpg"
+            src="images\cover.jpg"
             alt="Register"
             className="w-full h-96 object-cover rounded-3xl shadow-2xl"
           />

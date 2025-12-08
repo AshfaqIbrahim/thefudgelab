@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useCart } from "../Context/CartContext";
-import axios from 'axios';
-import { faLeaf } from '@fortawesome/free-solid-svg-icons';
-import { api } from '../Api/Axios';
+import axios from "axios";
+import { faLeaf } from "@fortawesome/free-solid-svg-icons";
+import { api } from "../Api/Axios";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
@@ -12,36 +12,31 @@ const AllProducts = () => {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
 
-
-
   useEffect(() => {
-    api.get("/products")
-    .then(res => {
-      setProducts(res.data).
-      setLoading(false)
-    })
-    .catch((err) => {
-      console.log("Error fetching products",err)
-      setLoading(false)
-    })
-  },[])
-
-
-
+    api
+      .get("/products")
+      .then((res) => {
+        setProducts(res.data).setLoading(false);
+      })
+      .catch((err) => {
+        console.log("Error fetching products", err);
+        setLoading(false);
+      });
+  }, []);
 
   const openProductDetails = (product) => {
     setSelectedProduct(product);
     setQuantity(1);
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
   };
 
   const closeProductDetails = () => {
     setSelectedProduct(null);
-    document.body.style.overflow = 'unset';
+    document.body.style.overflow = "unset";
   };
 
   const handleQuantityChange = (change) => {
-    setQuantity(prev => Math.max(1, prev + change));
+    setQuantity((prev) => Math.max(1, prev + change));
   };
 
   const handleAddToCart = () => {
@@ -87,13 +82,11 @@ const AllProducts = () => {
         {/* Products Grid */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-6">
-            <p className="text-[#543310]">
-              Showing {products.length} products
-            </p>
+            <p className="text-[#543310]">Showing {products.length} products</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
-            {products.map(product => (
+            {products.map((product) => (
               <div
                 key={product.id}
                 className="bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-[#AF8F6F]/20 cursor-pointer"
@@ -106,7 +99,7 @@ const AllProducts = () => {
                     alt={product.name}
                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                     onError={(e) => {
-                      e.target.src = '/images/placeholder-brownie.jpg';
+                      e.target.src = "/images/placeholder-brownie.jpg";
                     }}
                   />
                   <div className="absolute top-4 left-4 bg-[#543310]/90 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">
@@ -122,7 +115,7 @@ const AllProducts = () => {
                   <p className="text-sm text-[#74512D] mb-3 line-clamp-2">
                     {product.description}
                   </p>
-                  
+
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-2xl font-bold text-[#543310]">
                       {product.price}
@@ -152,22 +145,22 @@ const AllProducts = () => {
       {/* Product Details Modal */}
       {selectedProduct && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div 
+          <div
             className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Product Image */}
               <div className="relative">
-                <img 
-                  src={selectedProduct.image} 
+                <img
+                  src={selectedProduct.image}
                   alt={selectedProduct.name}
                   className="w-full h-96 lg:h-full object-cover rounded-t-3xl lg:rounded-l-3xl lg:rounded-tr-none"
                 />
                 <div className="absolute top-4 left-4 bg-[#543310]/90 text-white px-3 py-1 rounded-full text-sm font-semibold">
                   {selectedProduct.tag}
                 </div>
-                <button 
+                <button
                   onClick={closeProductDetails}
                   className="absolute top-4 right-4 bg-white/90 hover:bg-white text-[#543310] w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
                 >
@@ -177,19 +170,29 @@ const AllProducts = () => {
 
               {/* Product Details */}
               <div className="p-8">
-                <h2 className="text-3xl font-bold text-[#543310] mb-4 playfair-heading">{selectedProduct.name}</h2>
-                <p className="text-2xl font-bold text-[#74512D] mb-6">{selectedProduct.price}</p>
-                
+                <h2 className="text-3xl font-bold text-[#543310] mb-4 playfair-heading">
+                  {selectedProduct.name}
+                </h2>
+                <p className="text-2xl font-bold text-[#74512D] mb-6">
+                  {selectedProduct.price}
+                </p>
+
                 <div className="space-y-6">
                   {/* Description */}
                   <div>
-                    <h3 className="text-lg font-semibold text-[#543310] mb-2">Description</h3>
-                    <p className="text-[#74512D] leading-relaxed">{selectedProduct.description}</p>
+                    <h3 className="text-lg font-semibold text-[#543310] mb-2">
+                      Description
+                    </h3>
+                    <p className="text-[#74512D] leading-relaxed">
+                      {selectedProduct.description}
+                    </p>
                   </div>
 
                   {/* Ingredients */}
                   <div>
-                    <h3 className="text-lg font-semibold text-[#543310] mb-2">Ingredients</h3>
+                    <h3 className="text-lg font-semibold text-[#543310] mb-2">
+                      Ingredients
+                    </h3>
                     <ul className="text-[#74512D] list-disc list-inside space-y-1">
                       {selectedProduct.ingredients.map((ingredient, index) => (
                         <li key={index}>{ingredient}</li>
@@ -200,33 +203,47 @@ const AllProducts = () => {
                   {/* Product Info */}
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <h4 className="text-sm font-semibold text-[#543310]">Weight</h4>
+                      <h4 className="text-sm font-semibold text-[#543310]">
+                        Weight
+                      </h4>
                       <p className="text-[#74512D]">{selectedProduct.weight}</p>
                     </div>
                     <div>
-                      <h4 className="text-sm font-semibold text-[#543310]">Servings</h4>
-                      <p className="text-[#74512D]">{selectedProduct.servings}</p>
+                      <h4 className="text-sm font-semibold text-[#543310]">
+                        Servings
+                      </h4>
+                      <p className="text-[#74512D]">
+                        {selectedProduct.servings}
+                      </p>
                     </div>
                   </div>
 
                   {/* Allergens */}
                   <div>
-                    <h4 className="text-sm font-semibold text-[#543310]">Allergens</h4>
-                    <p className="text-[#74512D] text-sm">{selectedProduct.allergens}</p>
+                    <h4 className="text-sm font-semibold text-[#543310]">
+                      Allergens
+                    </h4>
+                    <p className="text-[#74512D] text-sm">
+                      {selectedProduct.allergens}
+                    </p>
                   </div>
 
                   {/* Quantity Selector */}
                   <div className="flex items-center gap-4">
-                    <span className="text-lg font-semibold text-[#543310]">Quantity:</span>
+                    <span className="text-lg font-semibold text-[#543310]">
+                      Quantity:
+                    </span>
                     <div className="flex items-center gap-3">
-                      <button 
+                      <button
                         onClick={() => handleQuantityChange(-1)}
                         className="w-10 h-10 bg-[#F8F4E1] hover:bg-[#AF8F6F] text-[#543310] rounded-lg flex items-center justify-center transition-all duration-300"
                       >
                         -
                       </button>
-                      <span className="text-xl font-bold text-[#543310] w-8 text-center">{quantity}</span>
-                      <button 
+                      <span className="text-xl font-bold text-[#543310] w-8 text-center">
+                        {quantity}
+                      </span>
+                      <button
                         onClick={() => handleQuantityChange(1)}
                         className="w-10 h-10 bg-[#F8F4E1] hover:bg-[#AF8F6F] text-[#543310] rounded-lg flex items-center justify-center transition-all duration-300"
                       >
@@ -237,13 +254,12 @@ const AllProducts = () => {
 
                   {/* Action Buttons */}
                   <div className="flex gap-4 pt-4">
-                    <button 
+                    <button
                       onClick={handleAddToCart}
                       className="flex-1 bg-[#543310] hover:bg-[#74512D] text-white py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg"
                     >
                       Add to Cart - {selectedProduct.price} × {quantity}
                     </button>
-                   
                   </div>
                 </div>
               </div>
