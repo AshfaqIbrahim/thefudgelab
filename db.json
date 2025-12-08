@@ -35,7 +35,7 @@
               "id": "1",
               "name": "Nutella Cheesecake",
               "price": "₹550",
-              "image": "/images/image4.jpg",
+              "image": "https://thefudgelab.vercel.app/images/image4.jpg",
               "tag": "New",
               "description": "A decadent fusion of rich Nutella and creamy cheesecake layered on a chocolate brownie base. Perfect for chocolate lovers seeking an indulgent experience.",
               "ingredients": [
@@ -75,7 +75,7 @@
               "id": "1",
               "name": "Nutella Cheesecake",
               "price": "₹550",
-              "image": "/images/image4.jpg",
+              "image": "https://thefudgelab.vercel.app/images/image4.jpg",
               "tag": "New",
               "description": "A decadent fusion of rich Nutella and creamy cheesecake layered on a chocolate brownie base. Perfect for chocolate lovers seeking an indulgent experience.",
               "ingredients": [
@@ -147,7 +147,7 @@
               "id": "2",
               "name": "Bento Brownie",
               "price": "₹240",
-              "image": "/images/cover.jpg",
+              "image": "https://thefudgelab.vercel.app/images/cover.jpg",
               "tag": "Best Seller",
               "description": "Artistically designed individual brownie portions with intricate decorations. Each piece is a work of edible art.",
               "ingredients": [
@@ -187,7 +187,7 @@
               "id": "1",
               "name": "Nutella Cheesecake",
               "price": "₹550",
-              "image": "/images/image4.jpg",
+              "image": "https://thefudgelab.vercel.app/images/image4.jpg",
               "tag": "New",
               "description": "A decadent fusion of rich Nutella and creamy cheesecake layered on a chocolate brownie base. Perfect for chocolate lovers seeking an indulgent experience.",
               "ingredients": [
@@ -227,7 +227,7 @@
               "id": "2",
               "name": "Bento Brownie",
               "price": "₹240",
-              "image": "/images/cover.jpg",
+              "image": "https://thefudgelab.vercel.app/images/cover.jpg",
               "tag": "Best Seller",
               "description": "Artistically designed individual brownie portions with intricate decorations. Each piece is a work of edible art.",
               "ingredients": [
@@ -267,7 +267,7 @@
               "id": "1",
               "name": "Nutella Cheesecake",
               "price": "₹550",
-              "image": "/images/image4.jpg",
+              "image": "https://thefudgelab.vercel.app/images/image4.jpg",
               "tag": "New",
               "description": "A decadent fusion of rich Nutella and creamy cheesecake layered on a chocolate brownie base. Perfect for chocolate lovers seeking an indulgent experience.",
               "ingredients": [
@@ -286,7 +286,7 @@
               "id": "2",
               "name": "Bento Brownie",
               "price": "₹240",
-              "image": "/images/cover.jpg",
+              "image": "https://thefudgelab.vercel.app/images/cover.jpg",
               "tag": "Best Seller",
               "description": "Artistically designed individual brownie portions with intricate decorations. Each piece is a work of edible art.",
               "ingredients": [
@@ -326,7 +326,7 @@
               "id": "1",
               "name": "Nutella Cheesecake",
               "price": "₹550",
-              "image": "/images/image4.jpg",
+              "image": "https://thefudgelab.vercel.app/images/image4.jpg",
               "tag": "New",
               "description": "A decadent fusion of rich Nutella and creamy cheesecake layered on a chocolate brownie base. Perfect for chocolate lovers seeking an indulgent experience.",
               "ingredients": [
@@ -377,7 +377,7 @@
       "id": "1",
       "name": "Nutella Cheesecake",
       "price": "₹550",
-      "image": "/images/image4.jpg",
+      "image": "https://thefudgelab.vercel.app/images/image4.jpg",
       "tag": "New",
       "description": "A decadent fusion of rich Nutella and creamy cheesecake layered on a chocolate brownie base. Perfect for chocolate lovers seeking an indulgent experience.",
       "ingredients": [
@@ -395,7 +395,7 @@
       "id": "2",
       "name": "Bento Brownie",
       "price": "₹240",
-      "image": "/images/cover.jpg",
+      "image": "https://thefudgelab.vercel.app/images/cover.jpg",
       "tag": "Best Seller",
       "description": "Artistically designed individual brownie portions with intricate decorations. Each piece is a work of edible art.",
       "ingredients": [
@@ -413,7 +413,7 @@
       "id": "3",
       "name": "Kunafa Chocolate",
       "price": "₹260",
-      "image": "/images/image9.jpg",
+      "image": "https://thefudgelab.vercel.app/images/image9.jpg",
       "tag": "New",
       "description": "Middle Eastern inspired dessert combining crispy kunafa with rich chocolate brownie. A unique texture experience.",
       "ingredients": [
@@ -431,7 +431,7 @@
       "id": "4",
       "name": "Assorted Box",
       "price": "₹330",
-      "image": "/images/image10.jpg",
+      "image": "https://thefudgelab.vercel.app/images/image10.jpg",
       "tag": "Best Seller",
       "description": "A curated selection of our most popular brownie varieties. Perfect for gifting or trying different flavors.",
       "ingredients": [
@@ -449,7 +449,7 @@
       "id": "5",
       "name": "Dream Brownie",
       "price": "₹340",
-      "image": "/images/image12.jpg",
+      "image": "https://thefudgelab.vercel.app/images/image12.jpg",
       "tag": "New",
       "description": "Our signature ultra-fudgy brownie with a crackly top and gooey center. A classic done to perfection.",
       "ingredients": [
@@ -467,7 +467,7 @@
       "id": "6",
       "name": "Nutella Brownie Tub",
       "price": "₹550",
-      "image": "/images/image6.jpg",
+      "image": "https://thefudgelab.vercel.app/images/image6.jpg",
       "tag": "Best Seller",
       "description": "Creamy Nutella swirled through our fudgiest brownie batter, served in a reusable ceramic tub.",
       "ingredients": [
@@ -494,7 +494,7 @@
       "servings": "4-6 people",
       "allergens": "Contains dairy, gluten, and nuts",
       "tag": "Popular",
-      "image": "/images/cover2.jpg"
+      "image": "https://thefudgelab.vercel.app/images/cover2.jpg"
     },
     {
       "id": "bc18",
@@ -512,7 +512,8 @@
       "servings": "2-4 people",
       "allergens": "Contains dairy, gluten, and nuts",
       "tag": "Featured",
-      "image": "\\images\\cover-page.jpg"
+      "image": "https://thefudgelab.vercel.app/images/cover-page.jpg" 
+
     },
     {
       "name": "Nutella brownies",
@@ -526,7 +527,7 @@
       "servings": "2-4 people",
       "allergens": "Contains dairy, gluten, and nuts",
       "tag": "Best Seller",
-      "image": "\\images\\cover-page.jpg",
+      "image": "https://thefudgelab.vercel.app/images/cover-page.jpg",
       "id": "faeb"
     }
   ]
