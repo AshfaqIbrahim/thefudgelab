@@ -169,12 +169,7 @@ const Login = () => {
                   </p>
                 </div>
 
-                {/* Admin Test Credentials Hint */}
-                <div className="text-center pt-2 border-t border-[#AF8F6F]/20">
-                  <p className="text-xs text-[#74512D]">
-                    Test Admin: admin@example.com / admin123
-                  </p>
-                </div>
+              
               </Form>
             )}
           </Formik>
