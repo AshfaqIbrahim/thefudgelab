@@ -3,7 +3,7 @@ import { Formik, Form, Field } from "formik";
 import { RegisterValidation } from "./RegisterValidation";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
-import { toast } from 'react-toastify';
+import { Home } from "lucide-react"; // Added icon for better mobile experience
 
 const initialValue = {
   fname: "",
@@ -14,41 +14,40 @@ const initialValue = {
 };
 
 const Register = () => {
-  const {registerUser} = useAuth();
+  const { registerUser } = useAuth();
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[#F8F4E1] flex items-center justify-center p-4 relative">
+    <div className="min-h-screen bg-[#F8F4E1] flex items-center justify-center p-4 md:p-6 relative">
       {/* Home Icon - Top Right */}
       <Link
         to="/home"
-        className="absolute top-6 right-6 text-[#543310] hover:text-[#74512D] transition-colors duration-200 z-10"
+        className="absolute top-4 md:top-6 right-4 md:right-6 text-[#543310] hover:text-[#74512D] transition-colors duration-200 z-10 p-2"
       >
-        <i className="fa-solid fa-house text-2xl"></i>
+        <Home className="w-5 h-5 md:w-6 md:h-6" />
       </Link>
 
-      <div className="w-full max-w-4xl flex items-center gap-8">
-        
-        {/* Image Section - Left Side */}
-        <div className="flex-1 rounded-3xl overflow-hidden">
+      <div className="w-full max-w-4xl flex flex-col lg:flex-row items-center gap-6 md:gap-8">
+        {/* Image Section - Top on mobile, Left on desktop */}
+        <div className="w-full lg:flex-1 rounded-2xl lg:rounded-3xl overflow-hidden order-1 lg:order-1">
           <img
-            src="images\cover.jpg"
+            src="images/cover.jpg"
             alt="Register"
-            className="w-full h-96 object-cover rounded-3xl shadow-2xl"
+            className="w-full h-48 md:h-64 lg:h-96 object-cover rounded-2xl lg:rounded-3xl shadow-lg lg:shadow-2xl"
           />
         </div>
 
-        {/* Form Section - Right Side */}
-        <div className="flex-1 max-w-xs">
+        {/* Form Section - Bottom on mobile, Right on desktop */}
+        <div className="w-full lg:flex-1 max-w-md lg:max-w-xs order-2 lg:order-2">
           {/* Card with login color theme */}
-          <div className="bg-white rounded-3xl border border-[#AF8F6F]/20 shadow-2xl overflow-hidden">
-            <div className="p-6">
+          <div className="bg-white rounded-2xl lg:rounded-3xl border border-[#AF8F6F]/20 shadow-lg lg:shadow-2xl overflow-hidden">
+            <div className="p-5 md:p-6">
               {/* Header */}
-              <div className="text-center mb-6">
-                <h1 className="text-2xl font-light text-[#543310] tracking-tight">
+              <div className="text-center mb-4 md:mb-6">
+                <h1 className="text-xl md:text-2xl font-light text-[#543310] tracking-tight">
                   CREATE ACCOUNT
                 </h1>
-                <div className="w-12 h-0.5 bg-linear-to-r from-transparent via-[#AF8F6F] to-transparent mx-auto mt-3"></div>
+                <div className="w-10 md:w-12 h-0.5 bg-linear-to-r from-transparent via-[#AF8F6F] to-transparent mx-auto mt-2 md:mt-3"></div>
               </div>
 
               <Formik
@@ -56,7 +55,6 @@ const Register = () => {
                 validationSchema={RegisterValidation}
                 validateOnBlur={false}
                 validateOnChange={false}
-
                 onSubmit={async (values, { setSubmitting }) => {
                   try {
                     await registerUser(values);
@@ -68,17 +66,16 @@ const Register = () => {
                   }
                 }}
               >
-
                 {({ errors, touched, isSubmitting }) => (
-                  <Form className="space-y-4">
+                  <Form className="space-y-3 md:space-y-4">
                     {/* Name Fields */}
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       <div>
                         <Field
                           type="text"
                           name="fname"
                           placeholder="First Name"
-                          className={`w-full px-3 py-2 bg-white border rounded-xl text-[#543310] placeholder-[#AF8F6F] focus:outline-none focus:ring-2 focus:ring-[#AF8F6F]/30 focus:border-[#74512D] transition-all text-sm ${
+                          className={`w-full px-3 py-2.5 md:py-2 bg-white border rounded-lg md:rounded-xl text-[#543310] placeholder-[#AF8F6F] focus:outline-none focus:ring-2 focus:ring-[#AF8F6F]/30 focus:border-[#74512D] transition-all text-sm md:text-base ${
                             errors.fname && touched.fname
                               ? "border-red-400"
                               : "border-[#AF8F6F]/50"
@@ -95,7 +92,7 @@ const Register = () => {
                           type="text"
                           name="lname"
                           placeholder="Last Name"
-                          className={`w-full px-3 py-2 bg-white border rounded-xl text-[#543310] placeholder-[#AF8F6F] focus:outline-none focus:ring-2 focus:ring-[#AF8F6F]/30 focus:border-[#74512D] transition-all text-sm ${
+                          className={`w-full px-3 py-2.5 md:py-2 bg-white border rounded-lg md:rounded-xl text-[#543310] placeholder-[#AF8F6F] focus:outline-none focus:ring-2 focus:ring-[#AF8F6F]/30 focus:border-[#74512D] transition-all text-sm md:text-base ${
                             errors.lname && touched.lname
                               ? "border-red-400"
                               : "border-[#AF8F6F]/50"
@@ -115,7 +112,7 @@ const Register = () => {
                         type="email"
                         name="email"
                         placeholder="Email Address"
-                        className={`w-full px-3 py-2 bg-white border rounded-xl text-[#543310] placeholder-[#AF8F6F] focus:outline-none focus:ring-2 focus:ring-[#AF8F6F]/30 focus:border-[#74512D] transition-all text-sm ${
+                        className={`w-full px-3 py-2.5 md:py-2 bg-white border rounded-lg md:rounded-xl text-[#543310] placeholder-[#AF8F6F] focus:outline-none focus:ring-2 focus:ring-[#AF8F6F]/30 focus:border-[#74512D] transition-all text-sm md:text-base ${
                           errors.email && touched.email
                             ? "border-red-400"
                             : "border-[#AF8F6F]/50"
@@ -134,7 +131,7 @@ const Register = () => {
                         type="password"
                         name="password"
                         placeholder="Password"
-                        className={`w-full px-3 py-2 bg-white border rounded-xl text-[#543310] placeholder-[#AF8F6F] focus:outline-none focus:ring-2 focus:ring-[#AF8F6F]/30 focus:border-[#74512D] transition-all text-sm ${
+                        className={`w-full px-3 py-2.5 md:py-2 bg-white border rounded-lg md:rounded-xl text-[#543310] placeholder-[#AF8F6F] focus:outline-none focus:ring-2 focus:ring-[#AF8F6F]/30 focus:border-[#74512D] transition-all text-sm md:text-base ${
                           errors.password && touched.password
                             ? "border-red-400"
                             : "border-[#AF8F6F]/50"
@@ -153,7 +150,7 @@ const Register = () => {
                         type="password"
                         name="cpassword"
                         placeholder="Confirm Password"
-                        className={`w-full px-3 py-2 bg-white border rounded-xl text-[#543310] placeholder-[#AF8F6F] focus:outline-none focus:ring-2 focus:ring-[#AF8F6F]/30 focus:border-[#74512D] transition-all text-sm ${
+                        className={`w-full px-3 py-2.5 md:py-2 bg-white border rounded-lg md:rounded-xl text-[#543310] placeholder-[#AF8F6F] focus:outline-none focus:ring-2 focus:ring-[#AF8F6F]/30 focus:border-[#74512D] transition-all text-sm md:text-base ${
                           errors.cpassword && touched.cpassword
                             ? "border-red-400"
                             : "border-[#AF8F6F]/50"
@@ -170,14 +167,14 @@ const Register = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-[#543310] text-white py-3 px-4 rounded-xl font-medium hover:bg-[#74512D] transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#543310]/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-sm"
+                      className="w-full bg-[#543310] text-white py-3 px-4 rounded-lg md:rounded-xl font-medium hover:bg-[#74512D] transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#543310]/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-sm md:text-base"
                     >
                       {isSubmitting ? "CREATING ACCOUNT..." : "CREATE ACCOUNT"}
                     </button>
 
                     {/* Additional Links */}
-                    <div className="text-center">
-                      <p className="text-[#74512D] text-xs">
+                    <div className="text-center pt-2">
+                      <p className="text-[#74512D] text-xs md:text-sm">
                         Already have an account?{" "}
                         <Link
                           to="/login"
@@ -198,4 +195,4 @@ const Register = () => {
   );
 };
 
-export default Register; 
+export default Register;
