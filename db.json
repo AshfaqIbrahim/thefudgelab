@@ -1,0 +1,533 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@gmail.com",
+      "password": "admin123",
+      "fname": "Ashfaq",
+      "role": "admin",
+      "cart": [],
+      "profile": {
+        "avatar": null,
+        "addresses": [
+          {
+            "fullName": "Ashfaq",
+            "address": "Manjeshwar",
+            "city": "Manjeshwar",
+            "state": "Kerala",
+            "pincode": "671323",
+            "country": "India",
+            "phone": "8660374131",
+            "addressType": "home",
+            "id": "addr_1764573095880",
+            "isDefault": true
+          }
+        ],
+        "phone": ""
+      },
+      "orders": [
+        {
+          "id": "ORD1764573114364",
+          "userId": "1",
+          "date": "2025-12-01T07:11:54.364Z",
+          "items": [
+            {
+              "id": "1",
+              "name": "Nutella Cheesecake",
+              "price": "₹550",
+              "image": "/images/image4.jpg",
+              "tag": "New",
+              "description": "A decadent fusion of rich Nutella and creamy cheesecake layered on a chocolate brownie base. Perfect for chocolate lovers seeking an indulgent experience.",
+              "ingredients": [
+                "Premium Nutella",
+                "Cream Cheese",
+                "Dark Chocolate",
+                "Fresh Cream",
+                "Cocoa Powder"
+              ],
+              "weight": "500g",
+              "servings": "4-6 people",
+              "allergens": "Contains dairy, gluten, and nuts",
+              "quantity": 1
+            }
+          ],
+          "total": 550,
+          "status": "delivered",
+          "shippingAddress": {
+            "fullName": "Ashfaq",
+            "address": "Manjeshwar",
+            "city": "Manjeshwar",
+            "state": "Kerala",
+            "pincode": "671323",
+            "country": "India",
+            "phone": "8660374131"
+          },
+          "paymentMethod": "card",
+          "paymentStatus": "completed",
+          "updatedAt": "2025-12-02T04:18:22.940Z"
+        },
+        {
+          "id": "ORD1765167774398",
+          "userId": "1",
+          "date": "2025-12-08T04:22:54.398Z",
+          "items": [
+            {
+              "id": "1",
+              "name": "Nutella Cheesecake",
+              "price": "₹550",
+              "image": "/images/image4.jpg",
+              "tag": "New",
+              "description": "A decadent fusion of rich Nutella and creamy cheesecake layered on a chocolate brownie base. Perfect for chocolate lovers seeking an indulgent experience.",
+              "ingredients": [
+                "Premium Nutella",
+                "Cream Cheese",
+                "Dark Chocolate",
+                "Fresh Cream",
+                "Cocoa Powder"
+              ],
+              "weight": "500g",
+              "servings": "4-6 people",
+              "allergens": "Contains dairy, gluten, and nuts",
+              "quantity": 1
+            }
+          ],
+          "subtotal": 550,
+          "tax": 27.5,
+          "codFee": 20,
+          "total": 597.5,
+          "status": "confirmed",
+          "shippingAddress": {
+            "fullName": "Ashfaq ",
+            "address": "Manjeshwar",
+            "city": "Kasaragod",
+            "state": "Kerala",
+            "pincode": "671323",
+            "country": "India",
+            "phone": "8660374131"
+          },
+          "paymentMethod": "cod",
+          "paymentStatus": "pending",
+          "updatedAt": "2025-12-08T04:22:54.398Z"
+        }
+      ]
+    },
+    {
+      "id": "aafd",
+      "fname": "Ashfaq",
+      "lname": "Ibrahim",
+      "email": "ashfaqibrahim09@gmail.com",
+      "password": "123123",
+      "cpassword": "123123",
+      "cart": [],
+      "profile": {
+        "avatar": null,
+        "addresses": [
+          {
+            "fullName": "Ashfaq Ibrahim",
+            "address": "Manjeshwar",
+            "city": "Manjeshwar",
+            "state": "Kerala",
+            "pincode": "671323",
+            "country": "India",
+            "phone": "8660374131",
+            "addressType": "home",
+            "id": "addr_1764411716031",
+            "isDefault": true
+          }
+        ],
+        "phone": ""
+      },
+      "orders": [
+        {
+          "id": "ORD1764411781933",
+          "userId": "aafd",
+          "date": "2025-11-29T10:23:01.933Z",
+          "items": [
+            {
+              "id": "2",
+              "name": "Bento Brownie",
+              "price": "₹240",
+              "image": "/images/cover.jpg",
+              "tag": "Best Seller",
+              "description": "Artistically designed individual brownie portions with intricate decorations. Each piece is a work of edible art.",
+              "ingredients": [
+                "Belgian Chocolate",
+                "Organic Eggs",
+                "French Butter",
+                "Almond Flour",
+                "Vanilla Extract"
+              ],
+              "weight": "200g",
+              "servings": "1-2 people",
+              "allergens": "Contains dairy, eggs, and almonds",
+              "quantity": 1
+            }
+          ],
+          "total": 240,
+          "status": "delivered",
+          "shippingAddress": {
+            "fullName": "Ashfaq Ibrahim",
+            "address": "Manjeshwar",
+            "city": "Manjeshwar",
+            "state": "Kerala",
+            "pincode": "671323",
+            "country": "India",
+            "phone": "8660374131"
+          },
+          "paymentMethod": "upi",
+          "paymentStatus": "completed",
+          "updatedAt": "2025-12-02T04:18:27.565Z"
+        },
+        {
+          "id": "ORD1764583959368",
+          "userId": "aafd",
+          "date": "2025-12-01T10:12:39.368Z",
+          "items": [
+            {
+              "id": "1",
+              "name": "Nutella Cheesecake",
+              "price": "₹550",
+              "image": "/images/image4.jpg",
+              "tag": "New",
+              "description": "A decadent fusion of rich Nutella and creamy cheesecake layered on a chocolate brownie base. Perfect for chocolate lovers seeking an indulgent experience.",
+              "ingredients": [
+                "Premium Nutella",
+                "Cream Cheese",
+                "Dark Chocolate",
+                "Fresh Cream",
+                "Cocoa Powder"
+              ],
+              "weight": "500g",
+              "servings": "4-6 people",
+              "allergens": "Contains dairy, gluten, and nuts",
+              "quantity": 1
+            }
+          ],
+          "total": 550,
+          "status": "delivered",
+          "shippingAddress": {
+            "fullName": "Ashfaq Ibrahim",
+            "address": "Manjeshwar",
+            "city": "Manjeshwar",
+            "state": "Kerala",
+            "pincode": "671323",
+            "country": "India",
+            "phone": "8660374131"
+          },
+          "paymentMethod": "cod",
+          "paymentStatus": "completed",
+          "updatedAt": "2025-12-02T04:18:15.674Z"
+        },
+        {
+          "id": "ORD1764684766584",
+          "userId": "aafd",
+          "date": "2025-12-02T14:12:46.584Z",
+          "items": [
+            {
+              "id": "2",
+              "name": "Bento Brownie",
+              "price": "₹240",
+              "image": "/images/cover.jpg",
+              "tag": "Best Seller",
+              "description": "Artistically designed individual brownie portions with intricate decorations. Each piece is a work of edible art.",
+              "ingredients": [
+                "Belgian Chocolate",
+                "Organic Eggs",
+                "French Butter",
+                "Almond Flour",
+                "Vanilla Extract"
+              ],
+              "weight": "200g",
+              "servings": "1-2 people",
+              "allergens": "Contains dairy, eggs, and almonds",
+              "quantity": 5
+            }
+          ],
+          "total": 1200,
+          "status": "confirmed",
+          "shippingAddress": {
+            "fullName": "Ashfaq Ibrahim",
+            "address": "Manjeshwar",
+            "city": "Manjeshwar",
+            "state": "Kerala",
+            "pincode": "671323",
+            "country": "India",
+            "phone": "8660374131"
+          },
+          "paymentMethod": "cod",
+          "paymentStatus": "completed",
+          "updatedAt": "2025-12-02T14:12:46.585Z"
+        },
+        {
+          "id": "ORD1764734760886",
+          "userId": "aafd",
+          "date": "2025-12-03T04:06:00.886Z",
+          "items": [
+            {
+              "id": "1",
+              "name": "Nutella Cheesecake",
+              "price": "₹550",
+              "image": "/images/image4.jpg",
+              "tag": "New",
+              "description": "A decadent fusion of rich Nutella and creamy cheesecake layered on a chocolate brownie base. Perfect for chocolate lovers seeking an indulgent experience.",
+              "ingredients": [
+                "Premium Nutella",
+                "Cream Cheese",
+                "Dark Chocolate",
+                "Fresh Cream",
+                "Cocoa Powder"
+              ],
+              "weight": "500g",
+              "servings": "4-6 people",
+              "allergens": "Contains dairy, gluten, and nuts",
+              "quantity": 1
+            },
+            {
+              "id": "2",
+              "name": "Bento Brownie",
+              "price": "₹240",
+              "image": "/images/cover.jpg",
+              "tag": "Best Seller",
+              "description": "Artistically designed individual brownie portions with intricate decorations. Each piece is a work of edible art.",
+              "ingredients": [
+                "Belgian Chocolate",
+                "Organic Eggs",
+                "French Butter",
+                "Almond Flour",
+                "Vanilla Extract"
+              ],
+              "weight": "200g",
+              "servings": "1-2 people",
+              "allergens": "Contains dairy, eggs, and almonds",
+              "quantity": 2
+            }
+          ],
+          "total": 1030,
+          "status": "confirmed",
+          "shippingAddress": {
+            "fullName": "Ashfaq Ibrahim",
+            "address": "Manjeshwar",
+            "city": "Manjeshwar",
+            "state": "Kerala",
+            "pincode": "671323",
+            "country": "India",
+            "phone": "8660374131"
+          },
+          "paymentMethod": "cod",
+          "paymentStatus": "completed",
+          "updatedAt": "2025-12-03T04:06:00.887Z"
+        },
+        {
+          "id": "ORD1764844626936",
+          "userId": "aafd",
+          "date": "2025-12-04T10:37:06.936Z",
+          "items": [
+            {
+              "id": "1",
+              "name": "Nutella Cheesecake",
+              "price": "₹550",
+              "image": "/images/image4.jpg",
+              "tag": "New",
+              "description": "A decadent fusion of rich Nutella and creamy cheesecake layered on a chocolate brownie base. Perfect for chocolate lovers seeking an indulgent experience.",
+              "ingredients": [
+                "Premium Nutella",
+                "Cream Cheese",
+                "Dark Chocolate",
+                "Fresh Cream",
+                "Cocoa Powder"
+              ],
+              "weight": "500g",
+              "servings": "4-6 people",
+              "allergens": "Contains dairy, gluten, and nuts",
+              "quantity": 1
+            }
+          ],
+          "subtotal": 550,
+          "tax": 27.5,
+          "codFee": 20,
+          "total": 597.5,
+          "status": "confirmed",
+          "shippingAddress": {
+            "fullName": "Ashfaq Ibrahim",
+            "address": "Manjeshwar",
+            "city": "Manjeshwar",
+            "state": "Kerala",
+            "pincode": "671323",
+            "country": "India",
+            "phone": "8660374131"
+          },
+          "paymentMethod": "cod",
+          "paymentStatus": "pending",
+          "updatedAt": "2025-12-04T10:37:06.936Z"
+        }
+      ]
+    },
+    {
+      "id": "a302",
+      "fname": "Thathmeer",
+      "lname": "",
+      "email": "thathu@gmail.com",
+      "password": "123123",
+      "cpassword": "123123",
+      "cart": []
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Nutella Cheesecake",
+      "price": "₹550",
+      "image": "/images/image4.jpg",
+      "tag": "New",
+      "description": "A decadent fusion of rich Nutella and creamy cheesecake layered on a chocolate brownie base. Perfect for chocolate lovers seeking an indulgent experience.",
+      "ingredients": [
+        "Premium Nutella",
+        "Cream Cheese",
+        "Dark Chocolate",
+        "Fresh Cream",
+        "Cocoa Powder"
+      ],
+      "weight": "500g",
+      "servings": "4-6 people",
+      "allergens": "Contains dairy, gluten, and nuts"
+    },
+    {
+      "id": "2",
+      "name": "Bento Brownie",
+      "price": "₹240",
+      "image": "/images/cover.jpg",
+      "tag": "Best Seller",
+      "description": "Artistically designed individual brownie portions with intricate decorations. Each piece is a work of edible art.",
+      "ingredients": [
+        "Belgian Chocolate",
+        "Organic Eggs",
+        "French Butter",
+        "Almond Flour",
+        "Vanilla Extract"
+      ],
+      "weight": "200g",
+      "servings": "1-2 people",
+      "allergens": "Contains dairy, eggs, and almonds"
+    },
+    {
+      "id": "3",
+      "name": "Kunafa Chocolate",
+      "price": "₹260",
+      "image": "/images/image9.jpg",
+      "tag": "New",
+      "description": "Middle Eastern inspired dessert combining crispy kunafa with rich chocolate brownie. A unique texture experience.",
+      "ingredients": [
+        "Kunafa Pastry",
+        "Milk Chocolate",
+        "Pistachios",
+        "Sweet Cheese",
+        "Rose Syrup"
+      ],
+      "weight": "350g",
+      "servings": "2-3 people",
+      "allergens": "Contains dairy, gluten, and nuts"
+    },
+    {
+      "id": "4",
+      "name": "Assorted Box",
+      "price": "₹330",
+      "image": "/images/image10.jpg",
+      "tag": "Best Seller",
+      "description": "A curated selection of our most popular brownie varieties. Perfect for gifting or trying different flavors.",
+      "ingredients": [
+        "Variety of Chocolates",
+        "Nuts",
+        "Caramel",
+        "Seasonal Fruits",
+        "Premium Cocoa"
+      ],
+      "weight": "400g",
+      "servings": "4-6 people",
+      "allergens": "Contains dairy, gluten, and various nuts"
+    },
+    {
+      "id": "5",
+      "name": "Dream Brownie",
+      "price": "₹340",
+      "image": "/images/image12.jpg",
+      "tag": "New",
+      "description": "Our signature ultra-fudgy brownie with a crackly top and gooey center. A classic done to perfection.",
+      "ingredients": [
+        "70% Dark Chocolate",
+        "Walnuts",
+        "Brown Sugar",
+        "Farm Fresh Eggs",
+        "Sea Salt"
+      ],
+      "weight": "300g",
+      "servings": "2-4 people",
+      "allergens": "Contains dairy, eggs, and walnuts"
+    },
+    {
+      "id": "6",
+      "name": "Nutella Brownie Tub",
+      "price": "₹550",
+      "image": "/images/image6.jpg",
+      "tag": "Best Seller",
+      "description": "Creamy Nutella swirled through our fudgiest brownie batter, served in a reusable ceramic tub.",
+      "ingredients": [
+        "Nutella",
+        "Hazelnuts",
+        "Milk Chocolate",
+        "Cocoa Butter",
+        "Vanilla Bean"
+      ],
+      "weight": "600g",
+      "servings": "6-8 people",
+      "allergens": "Contains dairy, gluten, hazelnuts"
+    },
+    {
+      "id": "7",
+      "name": "Nutella Brownie",
+      "price": "₹699",
+      "category": "Brownies",
+      "description": "Indulge in pure chocolate bliss with our Nutella Brownie — a rich, fudgy treat made with everyone’s favorite hazelnut spread. Each brownie is baked to perfection with a crackly top and a soft, gooey center bursting with creamy Nutella flavor.",
+      "ingredients": [
+        "Premium ingredients"
+      ],
+      "weight": "600g",
+      "servings": "4-6 people",
+      "allergens": "Contains dairy, gluten, and nuts",
+      "tag": "Popular",
+      "image": "/images/cover2.jpg"
+    },
+    {
+      "id": "bc18",
+      "name": "Pistachio & Nutella Fusion",
+      "price": "₹499",
+      "category": "Brownies",
+      "description": "Experience luxury in every slice. Our Pistachio & Nutella Fusion Brownie features a rich, fudgy chocolate base topped with a silky blend of creamy Nutella and premium pistachio spread. Beautifully finished with decorative swirls and whole nut accents, it’s the perfect balance of smooth sweetness and nutty indulgence.",
+      "ingredients": [
+        "Cocoa-rich brownie",
+        "Nutella",
+        "Natural pistachio paste",
+        "Freshly roasted pistachios"
+      ],
+      "weight": "300g",
+      "servings": "2-4 people",
+      "allergens": "Contains dairy, gluten, and nuts",
+      "tag": "Featured",
+      "image": "\\images\\cover-page.jpg"
+    },
+    {
+      "name": "Nutella brownies",
+      "price": "₹1199.97",
+      "category": "Cheesecakes",
+      "description": "yummy brownies",
+      "ingredients": [
+        "Premium ingredients"
+      ],
+      "weight": "300g",
+      "servings": "2-4 people",
+      "allergens": "Contains dairy, gluten, and nuts",
+      "tag": "Best Seller",
+      "image": "\\images\\cover-page.jpg",
+      "id": "faeb"
+    }
+  ]
+}
