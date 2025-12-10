@@ -354,16 +354,6 @@ const ProductShowcase = () => {
               </div>
             ))}
           </div>
-          
-          {/* Mobile Swipe Indicator - Only visible on mobile */}
-          <div className="md:hidden flex justify-center items-center mt-6 space-x-2">
-            <div className="w-2 h-2 bg-[#543310]/30 rounded-full"></div>
-            <div className="w-2 h-2 bg-[#543310]/30 rounded-full"></div>
-            <div className="w-2 h-2 bg-[#543310]/70 rounded-full"></div>
-            <div className="w-2 h-2 bg-[#543310]/30 rounded-full"></div>
-            <div className="w-2 h-2 bg-[#543310]/30 rounded-full"></div>
-            <span className="text-sm text-[#543310]/60 ml-2">Swipe →</span>
-          </div>
         </div>
       </section>
 
