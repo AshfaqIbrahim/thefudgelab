@@ -3,7 +3,7 @@ import { Formik, Form, Field } from "formik";
 import { LoginValidation } from "./LoginValidation";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const initialValue = {
   email: "",
@@ -30,7 +30,7 @@ const Login = () => {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
         style={{
           backgroundImage: "url('/src/assets/cover2.jpg')",
-        }} 
+        }}
       ></div>
 
       {/* Form Container */}
@@ -56,15 +56,15 @@ const Login = () => {
                 if (success) {
                   // Get the latest user data from localStorage
                   const currentUser = JSON.parse(localStorage.getItem("user"));
-                  console.log('🔐 Login successful - User:', currentUser);
-                  console.log('🔐 User role:', currentUser?.role);
-                  
+                  console.log("🔐 Login successful - User:", currentUser);
+                  console.log("🔐 User role:", currentUser?.role);
+
                   // Redirect based on role
-                  if (currentUser && currentUser.role === 'admin') {
-                    console.log('🔐 Redirecting to admin dashboard');
+                  if (currentUser && currentUser.role === "admin") {
+                    console.log("🔐 Redirecting to admin dashboard");
                     navigate("/admin");
                   } else {
-                    console.log('🔐 Redirecting to home');
+                    console.log("🔐 Redirecting to home");
                     navigate("/home");
                   }
                 }
@@ -158,7 +158,7 @@ const Login = () => {
 
                 {/* Sign Up Link */}
                 <div className="text-center pt-4">
-                  <p className="text-[#74512D] text-sm"> 
+                  <p className="text-[#74512D] text-sm">
                     Don't have an account?{" "}
                     <Link
                       to="/register"
@@ -168,8 +168,6 @@ const Login = () => {
                     </Link>
                   </p>
                 </div>
-
-              
               </Form>
             )}
           </Formik>
