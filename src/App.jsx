@@ -10,12 +10,14 @@ import UserProfile from "./Components/UserProfile";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Toast.css";
+import SearchPage from "./Components/SearchPage";
 
 //Admin sec
 import AdminHome from "./Pages/Admin/AdminHome";
 import ProductManagement from "./Pages/Admin/ProductManagement";
 import OrderManagement from "./Pages/Admin/OrderManagement";
 import UserManagement from "./Pages/Admin/UserManagement";
+import CartPage from "./Components/CartPage";
 
 function App() {
   return (
@@ -30,6 +32,10 @@ function App() {
           <Route path="/payment" element={<Payment />} />
           <Route path="/my-orders" element={<MyOrders />} />
           <Route path="/profile" element={<UserProfile />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/cart" element={<CartPage />} />
+
+
 
           {/*Admin Sec */}
           <Route path="/admin" element={<AdminHome />} />

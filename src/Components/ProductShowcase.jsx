@@ -289,7 +289,7 @@ const ProductShowcase = () => {
     <>
       <section className="bg-linear-to-br from-[#F8F4E1] to-[#AF8F6F] py-20 px-6 relative">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-[#543310] mb-4 playfair-heading">Premium Brownie Collection</h2>
+          <h2 className="text-4xl font-bold text-center text-[#543310] mb-4">Premium Brownie Collection</h2>
           <p className="text-[#74512D] text-center text-lg mb-12 max-w-2xl mx-auto poppins-body">
             Indulge in our artisanal brownies, each with a unique personality
           </p>

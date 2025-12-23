@@ -12,6 +12,7 @@ import {
   LogOut,
   Menu,
   X,
+  Home,
 } from "lucide-react";
 
 const AdminLayout = ({ children }) => {
@@ -34,13 +35,17 @@ const AdminLayout = ({ children }) => {
     };
 
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   const handleLogout = () => {
     logoutUser();
     navigate("/");
+  };
+
+  const handleViewStore = () => {
+    navigate("/home");
   };
 
   if (!user || user.role !== "admin") {
@@ -103,7 +108,7 @@ const AdminLayout = ({ children }) => {
     <div className="flex h-screen bg-[#F8F4E1]">
       {/* Mobile Sidebar Overlay */}
       {isMobile && isMobileSidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
           onClick={() => setIsMobileSidebarOpen(false)}
         />
@@ -118,11 +123,15 @@ const AdminLayout = ({ children }) => {
           transition-all duration-300
           border-r border-[#74512D]/30
           shadow-lg
-          ${isMobile ? (
-            isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full"
-          ) : (
-            isSidebarOpen ? "w-64" : "w-20"
-          )}
+          ${
+            isMobile
+              ? isMobileSidebarOpen
+                ? "translate-x-0"
+                : "-translate-x-full"
+              : isSidebarOpen
+              ? "w-64"
+              : "w-20"
+          }
           ${isMobile ? "w-64" : ""}
         `}
       >
@@ -199,7 +208,9 @@ const AdminLayout = ({ children }) => {
                     w-full text-left p-3 rounded-lg
                     transition-all duration-200
                     flex items-center
-                    ${(isSidebarOpen || isMobile) ? "space-x-3" : "justify-center"}
+                    ${
+                      isSidebarOpen || isMobile ? "space-x-3" : "justify-center"
+                    }
                     ${
                       isActive
                         ? "bg-[#AF8F6F] shadow-lg border border-[#F8F4E1]/20"
@@ -288,7 +299,7 @@ const AdminLayout = ({ children }) => {
                 </span>
               </div>
 
-              {/* Logout Button - Text hidden on small screens */}
+              {/* Logout Button */}
               <button
                 onClick={handleLogout}
                 className="
@@ -323,6 +334,38 @@ const AdminLayout = ({ children }) => {
             p-4 md:p-6
           "
           >
+            {/* Only the "Visit Store Front" banner/button */}
+            <div className="mb-6 p-4 bg-[#F8F4E1] rounded-lg border border-[#AF8F6F]/30 flex flex-col md:flex-row items-center justify-between">
+              <div className="flex items-center space-x-3 mb-3 md:mb-0">
+                <div className="w-10 h-10 bg-[#543310] rounded-lg flex items-center justify-center">
+                  <Home className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-[#543310]">Store Access</h3>
+                  <p className="text-[#74512D] text-sm">
+                    Preview how customers see your store
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={handleViewStore}
+                className="
+                  px-4 py-2
+                  bg-[#543310]
+                  hover:bg-[#74512D]
+                  text-white
+                  rounded-lg
+                  transition-all duration-200
+                  font-medium text-sm
+                  flex items-center space-x-2
+                  hover:shadow-md
+                "
+              >
+                <Home className="w-4 h-4" />
+                <span>Visit Store Front</span>
+              </button>
+            </div>
+
             {children}
           </div>
         </main>
