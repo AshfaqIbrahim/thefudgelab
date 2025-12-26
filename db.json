@@ -372,6 +372,17 @@
       "cart": []
     }
   ],
+
+  "blockedUsers": [
+    {
+      "id": "block_1",
+      "userId": "a302",
+      "email": "thathu@gmail.com",
+      "blockedAt": "2025-01-15T10:30:00Z",
+      "blockedBy": "1",
+      "reason": "Violated terms of service"
+    }
+  ],
   "products": [
     {
       "id": "1",
@@ -487,9 +498,7 @@
       "price": "₹699",
       "category": "Brownies",
       "description": "Indulge in pure chocolate bliss with our Nutella Brownie — a rich, fudgy treat made with everyone’s favorite hazelnut spread. Each brownie is baked to perfection with a crackly top and a soft, gooey center bursting with creamy Nutella flavor.",
-      "ingredients": [
-        "Premium ingredients"
-      ],
+      "ingredients": ["Premium ingredients"],
       "weight": "600g",
       "servings": "4-6 people",
       "allergens": "Contains dairy, gluten, and nuts",
@@ -512,17 +521,14 @@
       "servings": "2-4 people",
       "allergens": "Contains dairy, gluten, and nuts",
       "tag": "Featured",
-      "image": "https://thefudgelab.vercel.app/images/cover-page.jpg" 
-
+      "image": "https://thefudgelab.vercel.app/images/cover-page.jpg"
     },
     {
       "name": "Nutella brownies",
       "price": "₹1199.97",
       "category": "Cheesecakes",
       "description": "yummy brownies",
-      "ingredients": [
-        "Premium ingredients"
-      ],
+      "ingredients": ["Premium ingredients"],
       "weight": "300g",
       "servings": "2-4 people",
       "allergens": "Contains dairy, gluten, and nuts",

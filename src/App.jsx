@@ -7,7 +7,7 @@ import { CartProvider } from "./Context/CartContext";
 import Payment from "./Components/Payment";
 import MyOrders from "./Components/MyOrders";
 import UserProfile from "./Components/UserProfile";
-import { ToastContainer } from "react-toastify";
+import { Slide, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Toast.css";
 import SearchPage from "./Components/SearchPage";
@@ -35,8 +35,6 @@ function App() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/cart" element={<CartPage />} />
 
-
-
           {/*Admin Sec */}
           <Route path="/admin" element={<AdminHome />} />
           <Route path="/admin/products" element={<ProductManagement />} />
@@ -59,6 +57,7 @@ function App() {
           className="custom-toast-container"
           toastClassName="custom-toast"
           bodyClassName="custom-toast-body"
+          transition={Slide}
         />
       </BrowserRouter>
     </CartProvider>

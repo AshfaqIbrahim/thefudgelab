@@ -70,7 +70,7 @@ const Login = () => {
                 }
               } catch (error) {
                 console.error("Login error:", error);
-                toast.error("Login failed. Please try again.");
+                // Don't show toast here - AuthContext already shows it
               } finally {
                 setSubmitting(false);
               }
@@ -156,8 +156,21 @@ const Login = () => {
                   )}
                 </button>
 
+                {/* Customer Support Note */}
+                <div className="text-center pt-2">
+                  <p className="text-xs text-[#74512D]">
+                    Need help? Contact customer support at{" "}
+                    <a
+                      href="mailto:thefudgelab@gmail.com"
+                      className="text-[#543310] hover:underline"
+                    >
+                      thefudgelab@gmail.com
+                    </a>
+                  </p>
+                </div>
+
                 {/* Sign Up Link */}
-                <div className="text-center pt-4">
+                <div className="text-center pt-2">
                   <p className="text-[#74512D] text-sm">
                     Don't have an account?{" "}
                     <Link

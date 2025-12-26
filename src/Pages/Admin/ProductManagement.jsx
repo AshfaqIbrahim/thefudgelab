@@ -2227,7 +2227,7 @@ const ProductManagement = () => {
               resetForm();
             }}
             initialData={formData}
-          />
+          />  
         )}
       </div>
     </AdminLayout>

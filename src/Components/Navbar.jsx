@@ -15,6 +15,7 @@ const Navbar = () => {
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const { clearCart, getCartItemsCount } = useCart();
   const { user, logoutUser } = useAuth();
   const navigate = useNavigate();
@@ -32,6 +33,15 @@ const Navbar = () => {
     clearCart();
   };
 
+  // Check if user is admin
+  useEffect(() => {
+    if (user && user.role === "admin") {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
+  }, [user]);
+
   // Fetch search suggestions with debouncing
   const fetchSearchSuggestions = async (query) => {
     if (query.trim().length < 2) {
@@ -43,29 +53,33 @@ const Navbar = () => {
     setIsLoadingSuggestions(true);
     try {
       // Try JSON Server's built-in search first
-      const response = await api.get(`/products?q=${encodeURIComponent(query)}`);
-      
+      const response = await api.get(
+        `/products?q=${encodeURIComponent(query)}`
+      );
+
       let suggestions = response.data;
-      
+
       // If no results from built-in search, try client-side filtering
       if (suggestions.length === 0) {
         const allProductsResponse = await api.get("/products");
         const allProducts = allProductsResponse.data;
-        
-        suggestions = allProducts.filter(product => {
+
+        suggestions = allProducts.filter((product) => {
           const searchLower = query.toLowerCase();
           return (
             product.name.toLowerCase().includes(searchLower) ||
             product.description.toLowerCase().includes(searchLower) ||
             (product.tag && product.tag.toLowerCase().includes(searchLower)) ||
-            (product.category && product.category.toLowerCase().includes(searchLower)) ||
-            (product.ingredients && product.ingredients.some(ingredient => 
-              ingredient.toLowerCase().includes(searchLower)
-            ))
+            (product.category &&
+              product.category.toLowerCase().includes(searchLower)) ||
+            (product.ingredients &&
+              product.ingredients.some((ingredient) =>
+                ingredient.toLowerCase().includes(searchLower)
+              ))
           );
         });
       }
-      
+
       // Limit to 5 suggestions and prioritize exact matches
       const sortedSuggestions = suggestions
         .sort((a, b) => {
@@ -76,7 +90,7 @@ const Navbar = () => {
           return 0;
         })
         .slice(0, 5);
-      
+
       setSearchSuggestions(sortedSuggestions);
       setShowSuggestions(sortedSuggestions.length > 0);
     } catch (error) {
@@ -92,12 +106,12 @@ const Navbar = () => {
   const handleSearchInputChange = (e) => {
     const value = e.target.value;
     setSearchQuery(value);
-    
+
     // Clear previous timeout
     if (debounceTimeoutRef.current) {
       clearTimeout(debounceTimeoutRef.current);
     }
-    
+
     // Set new timeout for debouncing
     debounceTimeoutRef.current = setTimeout(() => {
       fetchSearchSuggestions(value);
@@ -137,24 +151,36 @@ const Navbar = () => {
     setShowSuggestions(false);
   };
 
+  // Handle admin dashboard navigation
+  const handleAdminDashboard = () => {
+    navigate("/admin");
+  };
+
+  // Don't show admin button on admin pages
+  const shouldShowAdminButton =
+    isAdmin && !window.location.pathname.startsWith("/admin");
+
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       // Close user dropdown
-      if (isDropdownOpen && !event.target.closest('.user-dropdown')) {
+      if (isDropdownOpen && !event.target.closest(".user-dropdown")) {
         setIsDropdownOpen(false);
       }
-      
+
       // Close search suggestions
-      if (showSuggestions && searchContainerRef.current && 
-          !searchContainerRef.current.contains(event.target)) {
+      if (
+        showSuggestions &&
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(event.target)
+      ) {
         setShowSuggestions(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
       if (debounceTimeoutRef.current) {
         clearTimeout(debounceTimeoutRef.current);
       }
@@ -164,13 +190,16 @@ const Navbar = () => {
   // Highlight matching text in suggestions
   const highlightText = (text, query) => {
     if (!query || !text) return text;
-    
-    const regex = new RegExp(`(${query})`, 'gi');
+
+    const regex = new RegExp(`(${query})`, "gi");
     const parts = text.split(regex);
-    
+
     return parts.map((part, index) =>
       regex.test(part) ? (
-        <mark key={index} className="bg-yellow-100 text-[#543310] font-semibold px-0.5">
+        <mark
+          key={index}
+          className="bg-yellow-100 text-[#543310] font-semibold px-0.5"
+        >
           {part}
         </mark>
       ) : (
@@ -195,7 +224,10 @@ const Navbar = () => {
             </div>
 
             {/* Search Bar - Desktop (Visible by default) */}
-            <div className="hidden md:flex flex-1 max-w-lg mx-8" ref={searchContainerRef}>
+            <div
+              className="hidden md:flex flex-1 max-w-lg mx-8"
+              ref={searchContainerRef}
+            >
               <div className="relative w-full">
                 <form onSubmit={handleSearch} className="w-full">
                   <div className="relative">
@@ -205,7 +237,9 @@ const Navbar = () => {
                       className="w-full px-4 py-2 pl-10 pr-10 rounded-full border border-[#AF8F6F] focus:outline-none focus:ring-2 focus:ring-[#543310] focus:border-transparent text-[#543310] placeholder-[#AF8F6F] bg-[#F8F4E1] transition-all duration-200"
                       value={searchQuery}
                       onChange={handleSearchInputChange}
-                      onFocus={() => searchQuery.length >= 2 && setShowSuggestions(true)}
+                      onFocus={() =>
+                        searchQuery.length >= 2 && setShowSuggestions(true)
+                      }
                     />
                     <button
                       type="submit"
@@ -231,7 +265,9 @@ const Navbar = () => {
                     {isLoadingSuggestions ? (
                       <div className="p-4 text-center">
                         <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-[#AF8F6F] mx-auto"></div>
-                        <p className="text-sm text-[#543310] mt-2">Searching...</p>
+                        <p className="text-sm text-[#543310] mt-2">
+                          Searching...
+                        </p>
                       </div>
                     ) : (
                       <>
@@ -251,7 +287,8 @@ const Navbar = () => {
                                   alt={product.name}
                                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-200"
                                   onError={(e) => {
-                                    e.target.src = "/images/placeholder-brownie.jpg";
+                                    e.target.src =
+                                      "/images/placeholder-brownie.jpg";
                                   }}
                                 />
                               </div>
@@ -260,7 +297,10 @@ const Navbar = () => {
                                   {highlightText(product.name, searchQuery)}
                                 </p>
                                 <p className="text-xs text-[#74512D] truncate">
-                                  {highlightText(product.description.substring(0, 60), searchQuery)}
+                                  {highlightText(
+                                    product.description.substring(0, 60),
+                                    searchQuery
+                                  )}
                                   {product.description.length > 60 ? "..." : ""}
                                 </p>
                                 <div className="flex items-center mt-1">
@@ -296,12 +336,24 @@ const Navbar = () => {
 
             {/* Desktop Navigation Links */}
             <div className="hidden md:flex space-x-6 items-center">
+              {/* Admin Dashboard Button - Desktop (Shield Icon Only) */}
+              {shouldShowAdminButton && (
+                <button
+                  onClick={handleAdminDashboard}
+                  className="text-[#543310] hover:text-[#AF8F6F] transition-colors duration-200 font-bold text-lg relative group"
+                  title="Go to Admin Dashboard"
+                >
+                  <i className="fa-solid fa-shield-halved"></i>
+                </button>
+              )}
+
               {/* User Dropdown */}
               {user ? (
                 <div className="relative user-dropdown">
                   <button
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     className="text-[#543310] hover:text-[#AF8F6F] transition-colors duration-200 font-bold text-lg"
+                    title="Account"
                   >
                     <i className="fa-regular fa-user"></i>
                   </button>
@@ -316,6 +368,17 @@ const Navbar = () => {
                           {user.email}
                         </p>
                       </div>
+
+                      {/* Admin Dashboard Link in Dropdown */}
+                      {isAdmin && (
+                        <button
+                          onClick={handleAdminDashboard}
+                          className="block w-full text-left px-4 py-2 text-sm text-[#543310] hover:bg-[#F8F4E1] transition-colors poppins-body"
+                        >
+                          <i className="fa-solid fa-shield-halved mr-2 text-[#543310]"></i>
+                          Admin Dashboard
+                        </button>
+                      )}
 
                       {/* Profile Link */}
                       <Link
@@ -358,6 +421,7 @@ const Navbar = () => {
               <button
                 onClick={() => setIsCartOpen(true)}
                 className="text-[#543310] hover:text-[#AF8F6F] transition-colors duration-200 font-bold text-lg relative"
+                title="Cart"
               >
                 <i className="fa-solid fa-basket-shopping"></i>
                 {getCartItemsCount() > 0 && (
@@ -371,6 +435,7 @@ const Navbar = () => {
               <button
                 onClick={() => setIsMenuOpen(true)}
                 className="text-[#543310] hover:text-[#AF8F6F] transition-colors duration-200 font-bold text-lg"
+                title="Menu"
               >
                 <i className="fa-solid fa-bars"></i>
               </button>
@@ -378,6 +443,21 @@ const Navbar = () => {
 
             {/* Mobile menu button */}
             <div className="md:hidden flex items-center space-x-4">
+              {/* Admin Dashboard Button - Mobile (Shield Icon Only) */}
+              {shouldShowAdminButton && (
+                <button
+                  onClick={handleAdminDashboard}
+                  className="text-[#543310] hover:text-[#AF8F6F] transition-colors duration-200 font-bold text-lg relative group"
+                  title="Admin Dashboard"
+                >
+                  <i className="fa-solid fa-shield-halved"></i>
+                  {/* Tooltip */}
+                  <span className="absolute -top-8 right-0 bg-[#543310] text-white text-xs font-semibold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                    Admin
+                  </span>
+                </button>
+              )}
+
               {/* Search Toggle Button - Mobile */}
               <button
                 className="text-[#543310] hover:text-[#AF8F6F] transition-colors duration-200"
@@ -406,6 +486,17 @@ const Navbar = () => {
                           {user.email}
                         </p>
                       </div>
+
+                      {/* Admin Dashboard Link in Mobile Dropdown */}
+                      {isAdmin && (
+                        <button
+                          onClick={handleAdminDashboard}
+                          className="block w-full text-left px-4 py-2 text-sm text-[#543310] hover:bg-[#F8F4E1] transition-colors poppins-body"
+                        >
+                          <i className="fa-solid fa-shield-halved mr-2 text-[#543310]"></i>
+                          Admin Dashboard
+                        </button>
+                      )}
 
                       {/* Profile Link */}
                       <Link
@@ -480,7 +571,10 @@ const Navbar = () => {
 
           {/* Mobile Search Bar (Appears below navbar when toggled) */}
           {showSearch && (
-            <div className="md:hidden py-3 border-t border-[#F8F4E1]" ref={searchContainerRef}>
+            <div
+              className="md:hidden py-3 border-t border-[#F8F4E1]"
+              ref={searchContainerRef}
+            >
               <div className="relative">
                 <form onSubmit={handleSearch} className="w-full">
                   <input
@@ -490,7 +584,9 @@ const Navbar = () => {
                     value={searchQuery}
                     onChange={handleSearchInputChange}
                     autoFocus
-                    onFocus={() => searchQuery.length >= 2 && setShowSuggestions(true)}
+                    onFocus={() =>
+                      searchQuery.length >= 2 && setShowSuggestions(true)
+                    }
                   />
                   <button
                     type="submit"
@@ -515,7 +611,9 @@ const Navbar = () => {
                     {isLoadingSuggestions ? (
                       <div className="p-3 text-center">
                         <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[#AF8F6F] mx-auto"></div>
-                        <p className="text-xs text-[#543310] mt-1">Searching...</p>
+                        <p className="text-xs text-[#543310] mt-1">
+                          Searching...
+                        </p>
                       </div>
                     ) : (
                       <>

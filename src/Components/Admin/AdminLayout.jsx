@@ -362,7 +362,7 @@ const AdminLayout = ({ children }) => {
                 "
               >
                 <Home className="w-4 h-4" />
-                <span>Visit Store Front</span>
+                <span>Visit Store</span>
               </button>
             </div>
 
