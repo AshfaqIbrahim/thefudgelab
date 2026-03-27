@@ -54,7 +54,7 @@ const Navbar = () => {
     try {
       // Try JSON Server's built-in search first
       const response = await api.get(
-        `/products?q=${encodeURIComponent(query)}`
+        `/products?q=${encodeURIComponent(query)}`,
       );
 
       let suggestions = response.data;
@@ -74,7 +74,7 @@ const Navbar = () => {
               product.category.toLowerCase().includes(searchLower)) ||
             (product.ingredients &&
               product.ingredients.some((ingredient) =>
-                ingredient.toLowerCase().includes(searchLower)
+                ingredient.toLowerCase().includes(searchLower),
               ))
           );
         });
@@ -204,7 +204,7 @@ const Navbar = () => {
         </mark>
       ) : (
         part
-      )
+      ),
     );
   };
 
@@ -281,7 +281,7 @@ const Navbar = () => {
                               onClick={() => handleSuggestionClick(product)}
                               className="flex items-center p-3 hover:bg-[#F8F4E1] rounded-lg transition-colors cursor-pointer group"
                             >
-                              <div className="w-12 h-12 rounded-lg overflow-hidden mr-3 flex-shrink-0">
+                              <div className="w-12 h-12 rounded-lg overflow-hidden mr-3 shrink-0">
                                 <img
                                   src={product.image}
                                   alt={product.name}
@@ -299,7 +299,7 @@ const Navbar = () => {
                                 <p className="text-xs text-[#74512D] truncate">
                                   {highlightText(
                                     product.description.substring(0, 60),
-                                    searchQuery
+                                    searchQuery,
                                   )}
                                   {product.description.length > 60 ? "..." : ""}
                                 </p>
@@ -624,7 +624,7 @@ const Navbar = () => {
                               onClick={() => handleSuggestionClick(product)}
                               className="flex items-center p-2 hover:bg-[#F8F4E1] rounded transition-colors cursor-pointer"
                             >
-                              <div className="w-10 h-10 rounded overflow-hidden mr-2 flex-shrink-0">
+                              <div className="w-10 h-10 rounded overflow-hidden mr-2 shrink-0">
                                 <img
                                   src={product.image}
                                   alt={product.name}

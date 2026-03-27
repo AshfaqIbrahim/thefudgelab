@@ -85,7 +85,7 @@ export const CartProvider = ({ children }) => {
         updatedItems = prevItems.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + quantity }
-            : item
+            : item,
         );
         message = `Added ${quantity} more ${product.name}${
           quantity > 1 ? "'s" : ""
@@ -124,14 +124,14 @@ export const CartProvider = ({ children }) => {
 
     setItems((prevItems) => {
       const updatedItems = prevItems.map((item) =>
-        item.id === productId ? { ...item, quantity } : item
+        item.id === productId ? { ...item, quantity } : item,
       );
 
       if (productName && productName !== "") {
         showToast(
           `Updated ${productName} quantity to ${quantity}`,
           "info",
-          "✏️"
+          "✏️",
         );
       }
 
