@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { api } from "../api/axios";
+import { api } from "../Api/Axios";
 
 const OurSteps = () => {
   const [activeStep, setActiveStep] = useState(null);
