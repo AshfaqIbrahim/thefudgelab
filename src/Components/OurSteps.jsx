@@ -25,7 +25,6 @@ const OurSteps = () => {
       icon: "🌱",
       time: "24-48 hrs",
       stage: "ingredients",
-      orderStatuses: ["confirmed"], // Order is confirmed, ingredients being sourced
     },
     {
       title: "Handcrafted",
@@ -34,16 +33,14 @@ const OurSteps = () => {
       icon: "👩‍🍳",
       time: "2-3 hours",
       stage: "preparing",
-      orderStatuses: ["preparing"], // Being prepared
     },
     {
       title: "Quality Check",
       desc: "Rigorous quality control for perfect texture",
       funFact: "Only 95% pass our quality test",
-      icon: "✓",
+      icon: "✨",
       time: "1 hour",
       stage: "quality",
-      orderStatuses: ["shipped"], // After shipping, quality check passed
     },
     {
       title: "Fast Delivery",
@@ -52,7 +49,6 @@ const OurSteps = () => {
       icon: "🚚",
       time: "Same day dispatch",
       stage: "delivery",
-      orderStatuses: ["delivered"], // Delivered
     },
   ];
 
@@ -333,52 +329,59 @@ const OurSteps = () => {
                   isVisible
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-12"
-                } bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 text-center group hover:bg-white/15 hover:border-white/30 hover:scale-105 transition-all duration-500 relative z-10 cursor-pointer`}
+                } relative z-10 cursor-pointer`}
                 style={{ transitionDelay: `${index * 150}ms` }}
                 onClick={() =>
                   setActiveStep(activeStep === index ? null : index)
                 }
               >
-                <div className="relative">
-                  <div
-                    className={`bg-[#F8F4E1]/20 backdrop-blur-sm border border-[#F8F4E1]/30 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-500 group-hover:bg-[#F8F4E1]/30 group-hover:scale-110 ${
-                      completedSteps[index]
-                        ? "ring-2 ring-[#F8F4E1] ring-offset-2 ring-offset-[#543310]"
-                        : ""
-                    }`}
-                  >
-                    <span className="text-2xl text-[#F8F4E1] font-bold">
-                      {index + 1}
-                    </span>
+                {/* Glass Card Effect */}
+                <div className="group relative">
+                  {/* Glass background */}
+                  <div className="absolute inset-0 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 transition-all duration-500 group-hover:bg-white/15 group-hover:border-white/30 group-hover:-translate-y-2"></div>
+
+                  {/* Card content */}
+                  <div className="relative p-8 text-center">
+                    <div className="relative">
+                      <div
+                        className={`bg-[#F8F4E1]/20 backdrop-blur-sm border border-[#F8F4E1]/30 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-500 group-hover:bg-[#F8F4E1]/30 group-hover:scale-110 ${
+                          completedSteps[index]
+                            ? "ring-2 ring-[#F8F4E1] ring-offset-2 ring-offset-transparent"
+                            : ""
+                        }`}
+                      >
+                        <span className="text-2xl text-[#F8F4E1] font-bold">
+                          {index + 1}
+                        </span>
+                      </div>
+                    </div>
+
+                    <h3 className="text-xl font-bold text-[#F8F4E1] mb-2 group-hover:text-white transition-colors duration-300">
+                      {step.icon} {step.title}
+                    </h3>
+
+                    <p className="text-[#AF8F6F] leading-relaxed group-hover:text-[#F8F4E1] transition-colors duration-300 mb-3">
+                      {step.desc}
+                    </p>
+
+                    <div
+                      className={`overflow-hidden transition-all duration-300 ${
+                        activeStep === index
+                          ? "max-h-32 opacity-100"
+                          : "max-h-0 opacity-0"
+                      }`}
+                    >
+                      <div className="mt-4 pt-4 border-t border-white/20">
+                        <p className="text-xs text-[#F8F4E1]">
+                          💡 Fun Fact: {step.funFact}
+                        </p>
+                        <p className="text-xs text-[#AF8F6F] mt-1">
+                          ⏱️ Estimated time: {step.time}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
-                <h3 className="text-xl font-bold text-[#F8F4E1] mb-2 group-hover:text-white transition-colors duration-300">
-                  {step.icon} {step.title}
-                </h3>
-
-                <p className="text-[#AF8F6F] leading-relaxed group-hover:text-[#F8F4E1] transition-colors duration-300 mb-3">
-                  {step.desc}
-                </p>
-
-                <div
-                  className={`overflow-hidden transition-all duration-300 ${
-                    activeStep === index
-                      ? "max-h-32 opacity-100"
-                      : "max-h-0 opacity-0"
-                  }`}
-                >
-                  <div className="mt-4 pt-4 border-t border-white/20">
-                    <p className="text-xs text-[#F8F4E1]">
-                      💡 Fun Fact: {step.funFact}
-                    </p>
-                    <p className="text-xs text-[#AF8F6F] mt-1">
-                      ⏱️ Estimated time: {step.time}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
               </div>
             ))}
           </div>
@@ -391,7 +394,7 @@ const OurSteps = () => {
               onClick={() => setShowModal(true)}
               className="bg-[#F8F4E1] text-[#543310] px-8 py-3 rounded-full font-semibold hover:bg-white transition-all duration-300 hover:scale-105 transform shadow-lg"
             >
-              🎥 Track Your Order's Journey
+              Track Your Order's Journey
             </button>
             <p className="text-[#AF8F6F] text-sm mt-3">
               Enter your Order ID to see where your brownie is in our process
@@ -490,7 +493,7 @@ const OurSteps = () => {
                 // Cancelled Order Display
                 <div className="text-center py-8">
                   <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <XCircle className="w-10 h-10 text-red-600" />
+                    <i className="fa-solid fa-circle-xmark text-4xl text-red-600"></i>
                   </div>
                   <h3 className="text-xl font-bold text-[#543310] mb-2">
                     Order Cancelled
