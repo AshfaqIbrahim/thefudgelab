@@ -5,14 +5,14 @@ export const reviewService = {
   async getReviews() {
     try {
       const response = await api.get("/reviews");
-      return response.data.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by newest first
+      return response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
     } catch (error) {
       console.error("Error fetching reviews:", error);
       return [];
     }
   },
 
-  // Add a new review
+  // Add a new review (now requires userId)
   async addReview(review) {
     try {
       const newReview = {
@@ -26,6 +26,17 @@ export const reviewService = {
     } catch (error) {
       console.error("Error adding review:", error);
       throw error;
+    }
+  },
+
+  // Optional: Get reviews by specific user
+  async getUserReviews(userId) {
+    try {
+      const response = await api.get(`/reviews?userId=${userId}`);
+      return response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } catch (error) {
+      console.error("Error fetching user reviews:", error);
+      return [];
     }
   },
 };

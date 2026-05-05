@@ -24,11 +24,12 @@
 // };
 
 // export default Testimonials
-
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { reviewService } from "../services/reviewServices";
+import { AuthContext } from "../Context/AuthContext";
 
 const Testimonials = () => {
+  const { user, isAuthenticated } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -44,6 +45,16 @@ const Testimonials = () => {
   useEffect(() => {
     loadReviews();
   }, []);
+
+  // Auto-fill user's name when logged in
+  useEffect(() => {
+    if (isAuthenticated && user && user.fname) {
+      setFormData((prev) => ({
+        ...prev,
+        name: user.fname + (user.lname ? ` ${user.lname}` : ""),
+      }));
+    }
+  }, [isAuthenticated, user]);
 
   const loadReviews = async () => {
     setLoading(true);
@@ -62,6 +73,15 @@ const Testimonials = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Check if user is authenticated
+    if (!isAuthenticated) {
+      setSubmitStatus({
+        type: "error",
+        message: "Please login to submit a review",
+      });
+      return;
+    }
 
     // Validation
     if (!formData.name.trim()) {
@@ -84,16 +104,22 @@ const Testimonials = () => {
     setSubmitStatus({ type: "", message: "" });
 
     try {
-      const newReview = await reviewService.addReview(formData);
-      setReviews((prev) => [newReview, ...prev]); // Add new review to the top
-      setFormData({ name: "", comment: "", rating: 5 });
+      // Include user ID with the review
+      const reviewWithUser = {
+        ...formData,
+        userId: user.id,
+        userEmail: user.email,
+      };
+
+      const newReview = await reviewService.addReview(reviewWithUser);
+      setReviews((prev) => [newReview, ...prev]);
+      setFormData((prev) => ({ ...prev, comment: "", rating: 5 }));
       setShowForm(false);
       setSubmitStatus({
         type: "success",
         message: "Thank you for your feedback!",
       });
 
-      // Clear success message after 3 seconds
       setTimeout(() => {
         setSubmitStatus({ type: "", message: "" });
       }, 3000);
@@ -107,6 +133,23 @@ const Testimonials = () => {
     }
   };
 
+  const handleWriteReviewClick = () => {
+    if (!isAuthenticated) {
+      setSubmitStatus({
+        type: "error",
+        message: "Please login to write a review. Redirecting to login...",
+      });
+      // Optionally redirect to login page after 2 seconds
+      setTimeout(() => {
+        window.location.href = '/login'; // Uncomment if you want auto-redirect
+      }, 0);
+      return;
+    }
+    setShowForm(true);
+    setSubmitStatus({ type: "", message: "" });
+  };
+
+  // Star Rating Component
   const StarRating = ({ rating, onRatingChange, interactive = false }) => {
     return (
       <div className="flex gap-1">
@@ -138,48 +181,66 @@ const Testimonials = () => {
             Join thousands of happy customers who love our brownies!
           </p>
 
-          {/* Toggle Form Button */}
-          <button
-            onClick={() => setShowForm(!showForm)}
-            className="bg-[#543310] text-white px-6 py-3 rounded-lg hover:bg-[#74512D] transition-colors duration-300 font-semibold"
-          >
-            {showForm ? "Cancel" : "Write a Review"}
-          </button>
+          {/* Status Message */}
+          {submitStatus.message && (
+            <div
+              className={`mb-4 p-3 rounded-lg max-w-md mx-auto ${
+                submitStatus.type === "success"
+                  ? "bg-green-100 text-green-700"
+                  : "bg-red-100 text-red-700"
+              }`}
+            >
+              {submitStatus.message}
+            </div>
+          )}
+
+          {/* Conditional Button based on Auth Status */}
+          {!showForm && (
+            <button
+              onClick={handleWriteReviewClick}
+              className="bg-[#543310] text-white px-6 py-3 rounded-lg hover:bg-[#74512D] transition-colors duration-300 font-semibold"
+            >
+              {isAuthenticated ? "Write a Review" : "Login to Write a Review"}
+            </button>
+          )}
+
+          {showForm && (
+            <button
+              onClick={() => setShowForm(false)}
+              className="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors duration-300 font-semibold"
+            >
+              Cancel
+            </button>
+          )}
         </div>
 
-        {/* Review Submission Form */}
-        {showForm && (
+        {/* Review Submission Form - Only shown if authenticated */}
+        {showForm && isAuthenticated && (
           <div className="bg-white rounded-2xl shadow-lg p-6 mb-12 max-w-2xl mx-auto">
             <h3 className="text-2xl font-bold text-[#543310] mb-4">
               Share Your Experience
             </h3>
 
-            {submitStatus.message && (
-              <div
-                className={`mb-4 p-3 rounded-lg ${
-                  submitStatus.type === "success"
-                    ? "bg-green-100 text-green-700"
-                    : "bg-red-100 text-red-700"
-                }`}
-              >
-                {submitStatus.message}
-              </div>
-            )}
-
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="block text-[#543310] font-semibold mb-2">
-                  Your Name *
+                  Your Name
                 </label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#543310]"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#543310] bg-gray-50"
                   placeholder="Enter your name"
                   required
+                  readOnly={!!user}
                 />
+                {user && (
+                  <p className="text-sm text-gray-500 mt-1">
+                    Logged in as {user.email}
+                  </p>
+                )}
               </div>
 
               <div className="mb-4">
@@ -208,6 +269,9 @@ const Testimonials = () => {
                   placeholder="Tell us about your experience with our products..."
                   required
                 />
+                <p className="text-sm text-gray-500 mt-1">
+                  Minimum 10 characters
+                </p>
               </div>
 
               <button
@@ -259,6 +323,14 @@ const Testimonials = () => {
                         })}
                       </p>
                     </div>
+                    {/* Optionally show verified badge */}
+                    {review.userId && (
+                      <div className="mt-2">
+                        <span className="text-xs text-green-600 bg-green-50 px-2 py-1 rounded-full">
+                          ✓ Verified Customer
+                        </span>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

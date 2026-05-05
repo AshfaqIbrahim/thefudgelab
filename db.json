@@ -378,21 +378,30 @@
       "name": "Mufeed",
       "comment": "The Bento Brownie is an excellent hero product — the presentation is unique and Instagram-worthy. Highlighting customization options or special toppings could boost even more appeal.",
       "rating": 5,
-      "date": "2024-01-15T10:30:00Z"
+      "date": "2024-01-15T10:30:00Z",
+      "userId": "user_001",
+      "userEmail": "mufeed@example.com",
+      "verified": true
     },
     {
       "id": 2,
       "name": "Ashfaq",
       "comment": "The idea of a brownie tub is fun, modern, and indulgent! Make the creamy and gooey textures more visible in the images to elevate crave-ability.",
       "rating": 5,
-      "date": "2024-01-20T14:22:00Z"
+      "date": "2024-01-20T14:22:00Z",
+      "userId": "aafd",
+      "userEmail": "ashfaqibrahim09@gmail.com",
+      "verified": true
     },
     {
       "id": 3,
       "name": "Mahroof",
       "comment": "A short flavor description (crispy kunafa + rich chocolate) will help customers understand the uniqueness and give them confidence to try it.",
       "rating": 4,
-      "date": "2024-01-25T09:15:00Z"
+      "date": "2024-01-25T09:15:00Z",
+      "userId": "user_003",
+      "userEmail": "mahroof@example.com",
+      "verified": true
     }
   ],
   "blockedUsers": [

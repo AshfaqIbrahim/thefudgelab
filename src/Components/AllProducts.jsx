@@ -14,6 +14,11 @@ const AllProducts = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(6); // 6 products per page (2 rows of 3)
+
   const { addToCart, getCartItemsCount } = useCart();
   const navigate = useNavigate();
 
@@ -46,13 +51,70 @@ const AllProducts = () => {
             product.category.toLowerCase().includes(query)) ||
           (product.ingredients &&
             product.ingredients.some((ingredient) =>
-              ingredient.toLowerCase().includes(query)
+              ingredient.toLowerCase().includes(query),
             ))
         );
       });
       setFilteredProducts(filtered);
     }
+    // Reset to first page when search/filter changes
+    setCurrentPage(1);
   }, [searchQuery, products]);
+
+  // Get current products for pagination
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct,
+  );
+
+  // Calculate total pages
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+  // Change page
+  const paginate = (pageNumber) => {
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+      // Scroll to top of products section
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  // Generate page numbers to display
+  const getPageNumbers = () => {
+    const pageNumbers = [];
+    const maxPagesToShow = 5;
+
+    if (totalPages <= maxPagesToShow) {
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+    } else {
+      if (currentPage <= 3) {
+        for (let i = 1; i <= 4; i++) {
+          pageNumbers.push(i);
+        }
+        pageNumbers.push("...");
+        pageNumbers.push(totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        pageNumbers.push(1);
+        pageNumbers.push("...");
+        for (let i = totalPages - 3; i <= totalPages; i++) {
+          pageNumbers.push(i);
+        }
+      } else {
+        pageNumbers.push(1);
+        pageNumbers.push("...");
+        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+          pageNumbers.push(i);
+        }
+        pageNumbers.push("...");
+        pageNumbers.push(totalPages);
+      }
+    }
+    return pageNumbers;
+  };
 
   const openProductDetails = (product) => {
     setSelectedProduct(product);
@@ -176,13 +238,13 @@ const AllProducts = () => {
 
         {/* Products Grid */}
         <div className="mb-8">
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
             <p className="text-[#543310]">
               {searchQuery
                 ? `Search results: ${filteredProducts.length} product${
                     filteredProducts.length !== 1 ? "s" : ""
                   }`
-                : `Showing all ${products.length} products`}
+                : `Showing ${indexOfFirstProduct + 1}-${Math.min(indexOfLastProduct, filteredProducts.length)} of ${filteredProducts.length} products`}
             </p>
             {!searchQuery && (
               <Link
@@ -214,60 +276,131 @@ const AllProducts = () => {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
-              {filteredProducts.map((product) => (
-                <div
-                  key={product.id}
-                  className="bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-[#AF8F6F]/20 cursor-pointer"
-                  onClick={() => openProductDetails(product)}
-                >
-                  {/* Product Image */}
-                  <div className="h-64 bg-gray-200 relative overflow-hidden">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                      onError={(e) => {
-                        e.target.src = "/images/placeholder-brownie.jpg";
-                      }}
-                    />
-                    <div className="absolute top-4 left-4 bg-[#543310]/90 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">
-                      {product.tag}
-                    </div>
-                  </div>
-
-                  {/* Product Info */}
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-[#543310] mb-2 playfair-heading">
-                      {product.name}
-                    </h3>
-                    <p className="text-sm text-[#74512D] mb-3 line-clamp-2">
-                      {product.description}
-                    </p>
-
-                    <div className="flex justify-between items-center mb-4">
-                      <span className="text-2xl font-bold text-[#543310]">
-                        {product.price}
-                      </span>
-                      <div className="text-xs text-[#AF8F6F] font-medium">
-                        <div>{product.weight}</div>
-                        <div>{product.servings}</div>
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
+                {currentProducts.map((product) => (
+                  <div
+                    key={product.id}
+                    className="bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-[#AF8F6F]/20 cursor-pointer"
+                    onClick={() => openProductDetails(product)}
+                  >
+                    {/* Product Image */}
+                    <div className="h-64 bg-gray-200 relative overflow-hidden">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                        onError={(e) => {
+                          e.target.src = "/images/placeholder-brownie.jpg";
+                        }}
+                      />
+                      <div className="absolute top-4 left-4 bg-[#543310]/90 text-white px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">
+                        {product.tag}
                       </div>
                     </div>
 
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        openProductDetails(product);
-                      }}
-                      className="w-full bg-[#543310] hover:bg-[#74512D] text-white py-3 rounded-xl transition-all duration-300 font-semibold hover:shadow-lg"
-                    >
-                      View Details
-                    </button>
+                    {/* Product Info */}
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-[#543310] mb-2 playfair-heading">
+                        {product.name}
+                      </h3>
+                      <p className="text-sm text-[#74512D] mb-3 line-clamp-2">
+                        {product.description}
+                      </p>
+
+                      <div className="flex justify-between items-center mb-4">
+                        <span className="text-2xl font-bold text-[#543310]">
+                          {product.price}
+                        </span>
+                        <div className="text-xs text-[#AF8F6F] font-medium">
+                          <div>{product.weight}</div>
+                          <div>{product.servings}</div>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openProductDetails(product);
+                        }}
+                        className="w-full bg-[#543310] hover:bg-[#74512D] text-white py-3 rounded-xl transition-all duration-300 font-semibold hover:shadow-lg"
+                      >
+                        View Details
+                      </button>
+                    </div>
                   </div>
+                ))}
+              </div>
+
+              {/* Pagination Component */}
+              {totalPages > 1 && (
+                <div className="mt-12 flex justify-center">
+                  <nav
+                    className="flex items-center gap-2 flex-wrap"
+                    aria-label="Pagination"
+                  >
+                    {/* Previous Button */}
+                    <button
+                      onClick={() => paginate(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className={`px-4 py-2 rounded-xl transition-all duration-300 flex items-center gap-2 ${
+                        currentPage === 1
+                          ? "bg-[#F8F4E1] text-[#AF8F6F] cursor-not-allowed"
+                          : "bg-[#543310] text-white hover:bg-[#74512D] hover:scale-105"
+                      }`}
+                    >
+                      <i className="fa-solid fa-chevron-left text-sm"></i>
+                      <span className="hidden sm:inline">Previous</span>
+                    </button>
+
+                    {/* Page Numbers */}
+                    <div className="flex gap-2">
+                      {getPageNumbers().map((page, index) => (
+                        <button
+                          key={index}
+                          onClick={() =>
+                            typeof page === "number" && paginate(page)
+                          }
+                          className={`w-10 h-10 rounded-xl transition-all duration-300 font-semibold ${
+                            currentPage === page
+                              ? "bg-[#543310] text-white shadow-md scale-105"
+                              : page === "..."
+                                ? "bg-transparent text-[#AF8F6F] cursor-default"
+                                : "bg-[#F8F4E1] text-[#543310] hover:bg-[#AF8F6F] hover:text-white"
+                          }`}
+                          disabled={page === "..."}
+                        >
+                          {page}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Next Button */}
+                    <button
+                      onClick={() => paginate(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                      className={`px-4 py-2 rounded-xl transition-all duration-300 flex items-center gap-2 ${
+                        currentPage === totalPages
+                          ? "bg-[#F8F4E1] text-[#AF8F6F] cursor-not-allowed"
+                          : "bg-[#543310] text-white hover:bg-[#74512D] hover:scale-105"
+                      }`}
+                    >
+                      <span className="hidden sm:inline">Next</span>
+                      <i className="fa-solid fa-chevron-right text-sm"></i>
+                    </button>
+                  </nav>
                 </div>
-              ))}
-            </div>
+              )}
+
+              {/* Page Info */}
+              {totalPages > 1 && (
+                <div className="text-center mt-4">
+                  <p className="text-sm text-[#AF8F6F]">
+                    Page {currentPage} of {totalPages}
+                  </p>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
